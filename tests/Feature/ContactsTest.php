@@ -9,6 +9,7 @@ use Tests\TestCase;
 
 class CreateContactsTest extends TestCase
 {
+    use RefreshDatabase; //Adcionado para limpar o banco entre um teste e outro para que a massa de dados previa não afete os assertDatabaseCount()
     #[Test]
     public function it_should_be_able_to_create_a_new_contact(): void
     {
@@ -95,7 +96,6 @@ class CreateContactsTest extends TestCase
         $response->assertSessionHasErrors([
             'email'
         ]);
-
         $this->assertDatabaseCount('contacts', 1);
     }
 
